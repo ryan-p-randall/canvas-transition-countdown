@@ -9,14 +9,36 @@
 .clock-heading {
     text-align: center;
     font-family: 'Roboto Slab', Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.75rem;
+    font-size: 1.7rem;
     margin: 0.5rem auto;
 }
-.clock-background {
+.clock-readout {
   text-align: center;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 1.3rem;
   margin-top: 0px;
+}
+.weeks {
+    font-size: 1.7rem;
+    padding-bottom: .3rem;
+    font-weight: 500;
+}
+.hms {
+    font-size: .9rem;
+    padding-top: .3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: space-evenly;
+    justify-content: center;
+}
+.hms div {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 62px;
+    font-weight: 300;
+}
+.label {
+    text-align: left;
 }
 </style>
 </head>
@@ -24,13 +46,27 @@
 
 <div id="countdown-timer">
     <div id="heading"></div>
-    <div class="clock-background">
-        <span id="weeks"></span>
-        <span id="days"></span>
-        <div>
-            <span id="hours"></span>
-            <span id="minutes"></span>
-            <span id="seconds"></span>
+    <div class="clock-readout">
+        <div id="weeks" class="weeks">
+            <span id="weeks-number"></span><span id="weeks-label"></span>
+        </div>
+        <div id="days">
+            <span id="days-number"></span><span id="days-label"></span>
+        </div>
+        <div id="hms" class="hms">
+            <div id="hours">
+                <span id="hours-number"></span><br>
+                <span id="hours-label" class="label"></span>
+            </div>
+            <div id="minutes">
+                <span id="minutes-number"></span><br>
+                <span id="minutes-label" class="label"></span>
+            </div>
+            <div id="seconds">
+                <span id="seconds-number"></span><br>
+                <span id="seconds-label" class="label"></span>
+            </div>
+            
         </div>
     </div>
 </div>
@@ -58,11 +94,16 @@ const x = setInterval(function() {
   // Output the result in named elements
 
   document.getElementById("heading").innerHTML = "<h3 class='clock-heading'>ISU Canvas Goes Live</h3>";
-  document.getElementById("weeks").innerHTML = `${weeks} ${weeks === 1 ? 'week, ' : 'weeks, '}`;
-  document.getElementById("days").innerHTML = `${days} ${days === 1 ? 'day, ' : 'days, '}`;
-  document.getElementById("hours").innerHTML = `${hours} ${hours === 1 ? 'hour, ' : 'hours, '}`;
-  document.getElementById("minutes").innerHTML = `${minutes} ${minutes === 1 ? 'minute, and ' : 'minutes, and '}`;
-  document.getElementById("seconds").innerHTML = `${seconds} ${seconds === 1 ? 'second.' : 'seconds.'}`;
+  document.getElementById("weeks-number").innerHTML = `${weeks}`;
+  document.getElementById("weeks-label").innerHTML = ` ${weeks === 1 ? 'week' : 'weeks'}`;
+  document.getElementById("days-number").innerHTML = `${days}`;
+  document.getElementById("days-label").innerHTML = ` ${days === 1 ? 'day' : 'days'}`;
+  document.getElementById("hours-number").innerHTML = `${hours}`;
+  document.getElementById("hours-label").innerHTML = `${hours === 1 ? 'hour' : 'hours'}`;
+  document.getElementById("minutes-number").innerHTML = `${minutes}`;
+  document.getElementById("minutes-label").innerHTML = `${minutes === 1 ? 'minute' : 'minutes'}`;
+  document.getElementById("seconds-number").innerHTML = `${seconds}`;
+  document.getElementById("seconds-label").innerHTML = `${seconds === 1 ? 'seconds' : 'seconds'}`;
 
   // If the count down is over, write some text 
   if (distance < 0) {
